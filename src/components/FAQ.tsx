@@ -1,5 +1,6 @@
 import { Plus } from "lucide-react";
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -28,35 +29,57 @@ export function FAQ() {
   ];
 
   return (
-    <section className="w-full bg-[#031c03] py-20 px-[74px]">
-      <h2 className="text-5xl font-bold text-[#ccffcc] text-center mb-12">
-        Perguntas Frequentes
-      </h2>
-      <div className="flex flex-col gap-4 items-center max-w-4xl mx-auto">
+    <section id="faq" className="w-full bg-[#031c03] py-[66px] px-[24px] md:py-20 md:px-[74px]">
+      <motion.h2 
+        initial={{ opacity: 0, y: -20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="text-[37px] md:text-5xl font-bold text-[#cfc] text-center mb-[33px] md:mb-12 leading-[95%]"
+      >
+        Perguntas <br className="md:hidden" /> Frequentes
+      </motion.h2>
+      <div className="flex flex-col gap-[14px] md:gap-4 items-center max-w-4xl mx-auto">
         {faqs.map((faq, index) => (
-          <div
+          <motion.div
             key={index}
-            className="w-full border-2 border-[rgba(204,255,204,0.17)] rounded-[10px] overflow-hidden"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            className="w-full border-[1.55px] md:border-2 border-[rgba(204,255,204,0.17)] rounded-[8px] md:rounded-[10px] overflow-hidden bg-white/5 backdrop-blur-sm"
           >
             <button
               onClick={() => setOpenIndex(openIndex === index ? null : index)}
-              className="w-full flex items-center justify-between px-7 py-5 text-left"
+              className="w-full flex items-start md:items-center justify-between px-[22px] py-[15px] md:px-7 md:py-5 text-left md:text-left gap-4"
             >
-              <p className="text-[#f0f0f0] text-xl font-medium">
+              <p className="text-[#f0f0f0] text-[15.5px] md:text-xl font-medium leading-[112%] md:leading-normal text-center md:text-left flex-1">
                 {faq.question}
               </p>
-              <div className={`transform transition-transform ${openIndex === index ? 'rotate-45' : ''}`}>
-                <Plus className="w-7 h-7 text-[#f0f0f0]" />
-              </div>
+              <motion.div 
+                animate={{ rotate: openIndex === index ? 45 : 0 }}
+                transition={{ duration: 0.2 }}
+                className="flex-shrink-0"
+              >
+                <Plus className="w-[22px] h-[22px] md:w-7 md:h-7 text-[#f0f0f0]" />
+              </motion.div>
             </button>
-            {openIndex === index && (
-              <div className="px-7 pb-5">
-                <p className="text-[#f0f0f0] text-lg">
-                  {faq.answer}
-                </p>
-              </div>
-            )}
-          </div>
+            <AnimatePresence>
+              {openIndex === index && (
+                <motion.div 
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="px-[22px] pb-[15px] md:px-7 md:pb-5 overflow-hidden"
+                >
+                  <p className="text-[#f0f0f0] text-[14px] md:text-lg text-center md:text-left leading-relaxed opacity-90">
+                    {faq.answer}
+                  </p>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
         ))}
       </div>
     </section>
