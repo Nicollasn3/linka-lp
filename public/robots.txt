@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://linka.com.br/sitemap.xml
+
