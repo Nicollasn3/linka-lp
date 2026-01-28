@@ -5,6 +5,11 @@ export function ContactForm() {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
 
+  const inputClass =
+    "w-full h-[52px] bg-white border-2 border-[#e5e5e5] rounded-[11px] px-4 " +
+    "shadow-[0px_6px_17.2px_0px_rgba(0,0,0,0.03)] " +
+    "focus:outline-none focus:border-primary placeholder:text-[#9b9b9b]";
+
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
@@ -60,15 +65,44 @@ export function ContactForm() {
         onSubmit={handleSubmit}
         className="flex flex-col gap-6 items-center max-w-2xl mx-auto"
       >
-        <input name="name" type="text" placeholder="Nome" required />
-        <input name="email" type="email" placeholder="Email" required />
-        <input name="phone" type="tel" placeholder="Telefone" required />
-        <input name="isp" type="text" placeholder="Nome do seu ISP" required />
+        <input
+          name="name"
+          type="text"
+          placeholder="Nome"
+          required
+          className={inputClass}
+        />
+
+        <input
+          name="email"
+          type="email"
+          placeholder="Email"
+          required
+          className={inputClass}
+        />
+
+        <input
+          name="phone"
+          type="tel"
+          placeholder="Telefone"
+          required
+          className={inputClass}
+        />
+
+        <input
+          name="isp"
+          type="text"
+          placeholder="Nome do seu ISP"
+          required
+          className={inputClass}
+        />
 
         <button
           type="submit"
           disabled={loading}
           className="w-full h-[52px] bg-primary text-black font-bold rounded-[11px]
+                     shadow-[0px_6px_18.9px_0px_rgba(0,0,0,0.03)]
+                     hover:opacity-90 transition-opacity
                      disabled:opacity-60 disabled:cursor-not-allowed"
         >
           {loading ? "Enviando..." : "Entre em contato"}
