@@ -51,36 +51,38 @@ export function Testimonials() {
   ];
 
   return (
-    <section className="w-full bg-bg py-20 px-[74px]">
-      <div className="flex items-start justify-center gap-16">
+    <section className="w-full bg-bg py-16 md:py-24 px-6 md:px-[74px]">
+      <div className="flex flex-col lg:flex-row items-center lg:items-start justify-center gap-10 lg:gap-16 max-w-7xl mx-auto">
+        
         {/* Coluna Esquerda - Título e Descrição */}
-        <div className="flex flex-col gap-4 flex-shrink-0 w-[414px]">
-          <h2 className="text-5xl font-bold text-black leading-tight">
+        <div className="flex flex-col gap-4 text-center lg:text-left shrink-0 w-full lg:w-[414px]">
+          <h2 className="text-3xl md:text-5xl font-bold text-black leading-tight">
             Confiança <span className="bg-primary px-2">comprovada</span>
           </h2>
-          <p className="text-xl text-[#4c4c4c] font-medium leading-tight">
+          <p className="text-lg md:text-xl text-[#4c4c4c] font-medium leading-tight max-w-md mx-auto lg:mx-0">
             Veja como outros provedores alcançaram novos patamares de crescimento aplicando nossas estratégias.
           </p>
         </div>
 
         {/* Coluna Direita - Grid de Testemunhos */}
-        <div className="flex gap-5 flex-1 max-w-4xl relative">
-          {/* Coluna 1 */}
-          <div className="flex flex-col gap-3 flex-1 relative">
-            {/* Gradiente superior */}
-            <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-bg to-transparent z-10 pointer-events-none"></div>
-            {/* Gradiente inferior */}
-            <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-bg to-transparent z-10 pointer-events-none"></div>
-            {testimonials.slice(0, 4).map((testimonial, index) => (
+        <div className="w-full relative">
+          {/* Efeito de Gradiente (opcional no mobile, visível no desktop) */}
+          <div className="hidden md:block absolute top-0 left-0 right-0 h-12 bg-gradient-to-b from-bg to-transparent z-10 pointer-events-none"></div>
+          <div className="hidden md:block absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-bg to-transparent z-10 pointer-events-none"></div>
+
+          {/* Grid Responsivo: 1 coluna no mobile, 2 colunas a partir de tablets (md) */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5 max-h-none lg:max-h-[600px] lg:overflow-y-auto pr-0 lg:pr-2 no-scrollbar">
+            {testimonials.map((testimonial, index) => (
               <div 
                 key={index}
-                className="bg-[#fcfcfc] rounded-[12px] p-6 shadow-[5px_6px_29.2px_0px_rgba(0,0,0,0.1)] overflow-hidden"
+                className="bg-[#fcfcfc] rounded-[12px] p-6 shadow-[0px_4px_20px_rgba(0,0,0,0.05)] md:shadow-[5px_6px_29.2px_0px_rgba(0,0,0,0.1)] border border-gray-100 flex flex-col justify-between"
               >
-                <p className="text-[#525252] text-sm font-medium leading-relaxed mb-3">
+                <p className="text-[#525252] text-sm md:text-base font-medium leading-relaxed mb-4 italic">
                   "{testimonial.quote}"
                 </p>
+                
                 <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-full border-2 border-primary overflow-hidden flex-shrink-0">
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-primary overflow-hidden shrink-0">
                     <img 
                       src={testimonial.avatar} 
                       alt={testimonial.name}
@@ -88,45 +90,10 @@ export function Testimonials() {
                     />
                   </div>
                   <div>
-                    <p className="text-black font-bold text-base">
+                    <p className="text-black font-bold text-sm md:text-base">
                       {testimonial.name}
                     </p>
-                    <p className="text-gray-600 text-sm">
-                      {testimonial.role}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Coluna 2 */}
-          <div className="flex flex-col gap-3 flex-1 relative overflow-visible">
-            {/* Gradiente superior */}
-            <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-bg to-transparent z-10 pointer-events-none"></div>
-            {/* Gradiente inferior */}
-            <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-bg to-transparent z-10 pointer-events-none"></div>
-            {testimonials.slice(4, 8).map((testimonial, index) => (
-              <div 
-                key={index + 4}
-                className="bg-[#fcfcfc] rounded-[12px] p-6 shadow-[5px_6px_29.2px_0px_rgba(0,0,0,0.1)] overflow-hidden"
-              >
-                <p className="text-[#525252] text-sm font-medium leading-relaxed mb-3">
-                  "{testimonial.quote}"
-                </p>
-                <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-full border-2 border-primary overflow-hidden flex-shrink-0">
-                    <img 
-                      src={testimonial.avatar} 
-                      alt={testimonial.name}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div>
-                    <p className="text-black font-bold text-base">
-                      {testimonial.name}
-                    </p>
-                    <p className="text-gray-600 text-sm">
+                    <p className="text-gray-600 text-xs md:text-sm">
                       {testimonial.role}
                     </p>
                   </div>
@@ -139,4 +106,3 @@ export function Testimonials() {
     </section>
   );
 }
-
